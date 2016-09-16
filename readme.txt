@@ -145,6 +145,7 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 
 = 1.1.1 =
 * Fix: Change rating url
+* New: Tested up to WP 4.7
 
 = 1.1.0 =
 * New: Tested up to WP 4.6
