@@ -118,10 +118,13 @@ if ( !class_exists('wpstaging') ) :
          */
         private function includes() {
             global $wpstg_options;
+            
             require_once WPSTG_PLUGIN_DIR . 'includes/logger.php';
             require_once WPSTG_PLUGIN_DIR . 'includes/scripts.php';
             require_once WPSTG_PLUGIN_DIR . 'includes/staging-functions.php';
+            
             if ( is_admin() || ( defined('WP_CLI') && WP_CLI ) ) {
+                
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
                 $wpstg_options = wpstg_get_settings(); // Load it on top of all
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/admin-actions.php';
@@ -134,12 +137,14 @@ if ( !class_exists('wpstaging') ) :
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/upload-functions.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/class-wpstg-license-handler.php';
+                require_once WPSTG_PLUGIN_DIR . 'includes/admin/class-wpstg-license-handler.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.interface.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.class.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/wpstg-sanitize.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/template-functions.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/error-handling.php';
+                require_once WPSTG_PLUGIN_DIR . 'includes/admin/wpstg-sanitize.php';
+                require_once WPSTG_PLUGIN_DIR . 'includes/admin/template-functions.php';
+                require_once WPSTG_PLUGIN_DIR . 'includes/admin/error-handling.php';
+                require_once WPSTG_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
+                
             }
         }
 
