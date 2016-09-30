@@ -13,10 +13,7 @@
 if( !defined( 'WP_UNINSTALL_PLUGIN' ) )
     exit;
 
-// Load WPSTG file
-include_once( 'wp-staging.php' );
-
-global $wpstg_options;
+$wpstg_options = get_option ('wpstg_settings');
 
 /**
  * Delete all the Plugin Options 

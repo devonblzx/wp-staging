@@ -84,7 +84,6 @@ if ( !class_exists('wpstaging') ) :
          * @return void
          */
         private function setup_constants() {
-            //global $wpdb;
 
             // Plugin Folder Path
             if ( !defined('WPSTG_PLUGIN_DIR') ) {
@@ -133,7 +132,6 @@ if ( !class_exists('wpstaging') ) :
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/welcome.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/settings/contextual-help.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/install.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/upload-functions.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/class-wpstg-license-handler.php';
@@ -198,19 +196,11 @@ function wp_staging_loaded() {
     return $wpstg;
     //WPSTG();
 }
-
 add_action('plugins_loaded', 'wp_staging_loaded');
-
-/* function WPSTG() {
-  global $wpstg;
-
-  if ( !is_null($wpstg) ) {
-  return $wpstg;
-  }
-
-  $wpstg = new wpstaging();
-  return $wpstg;
-  } */
 
 // Deactivate WPSTG (Pro)
 add_action('activated_plugin', array('WPSTG_Utils', 'deactivate_other_instances'));
+
+// Run activation hook. Must be called from outside of the singleton
+require_once WPSTG_PLUGIN_DIR . 'includes/install.php';
+register_activation_hook( __FILE__, 'wpstg_install_multisite' );

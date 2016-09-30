@@ -143,6 +143,10 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 
 == Changelog ==
 
+= {{ version }} = 
+* Fix: Settings are not deleted when plugin is removed
+* Fix: Staging site is available for non administrators
+
 = 1.1.1 =
 * Fix: Change rating url
 * New: Tested up to WP 4.7

@@ -18,10 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  */
 
-//register_activation_hook( WPSTG_PLUGIN_FILE, 'wpstg_install_multisite' );
-/*function wpstg_install_multisite($networkwide) {
+
+function wpstg_install_multisite($networkwide) {
     global $wpdb;
-             wp_die('fire');
             
     if (function_exists('is_multisite') && is_multisite()) {
         // check if it is a network activation - if so, run the activation function for each blog id
@@ -38,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         }   
     } 
     wpstg_install();      
-}*/
+}
 
 /**
  * Install
@@ -49,7 +48,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 0.9.0
  * @global $wpdb
- * @global $wpstg_options
  * @global $wp_version
  * @return void
  */
@@ -57,8 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 function wpstg_install() {
-    global $wpdb, $wpstg_options;
-
+    
     // Add Upgraded from Option
     $current_version = get_option( 'wpstg_version' );
     if( $current_version ) {
@@ -67,12 +64,15 @@ function wpstg_install() {
 
     // Update the current version
     update_option( 'wpstg_version', WPSTG_VERSION );
+    
     // Add plugin installation date and variable for rating div
     add_option( 'wpstg_installDate', date( 'Y-m-d h:i:s' ) );
     add_option( 'wpstg_RatingDiv', 'no' );
+    
     // Add First-time variables
     add_option( 'wpstg_firsttime', 'true' );
     add_option( 'wpstg_is_staging_site', 'false' );
+    
     // Show beta notice
     add_option( 'wpstg_hide_beta', 'no' );
 
