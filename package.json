@@ -6,7 +6,9 @@
   "css": "assets/css/wpstg-admin.css",
   "cssmin": "assets/css/wpstg-admin.min.css",
   "devDependencies": {
+    "browser-sync": "^2.15.0",
     "grunt": "~0.4.5",
+    "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-compress": "~0.13.0",
     "grunt-contrib-copy": "~0.7.0",
@@ -18,6 +20,7 @@
     "grunt-version": ">=0.3.1",
     "load-grunt-config": "*",
     "load-grunt-tasks": "~3.1.0",
-    "time-grunt": "~1.1.0"
-	}
+    "time-grunt": "~1.1.0",
+    "grunt-contrib-watch": "~1.1.0"
+  }
 }

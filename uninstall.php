@@ -5,7 +5,7 @@
  *
  * @package     WPSTG
  * @subpackage  Uninstall
- * @copyright   Copyright (c) 2015, René Hermenau
+ * @copyright   Copyright (c) 2015, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       0.9.0
  */

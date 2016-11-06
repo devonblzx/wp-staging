@@ -255,14 +255,15 @@
             $('#wpstg-workflow').addClass('loading');
             var data = {
                 action: 'wpstg_scanning',
+                //action: 'wpstg_get_dirs',
                 clone: $(this).data('clone'),
-                nonce: wpstg.nonce
+                nonce: wpstg.nonce 
             };
 
             $('#wpstg-workflow').load(ajaxurl, data, function (response, status, xhr) {
                 if (status == 'error') { //Unknown error
                     console.log(xhr.status + ' ' + xhr.statusText);
-                    wpstg_show_error_die('Fatal Error: This should not happen. Please try again! <br> If restarting does not work <a href="https://wordpress.org/support/plugin/wp-staging" target="blank">get in contact with us</a> ' + xhr.status + ' ' + xhr.statusText);
+                    wpstg_show_error_die('Fatal Error 12: This should not happen. Please try again! <br> If restarting does not work <a href="https://wordpress.org/support/plugin/wp-staging" target="blank">get in contact with us</a> ' + xhr.status + ' ' + xhr.statusText);
                 }
                 $('#wpstg-workflow').removeClass('loading');
                 $('.wpstg-current-step').removeClass('wpstg-current-step')

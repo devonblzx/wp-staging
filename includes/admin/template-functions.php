@@ -4,7 +4,7 @@
  *
  * @package     WPSTG
  * @subpackage  Functions/Templates
- * @copyright   Copyright (c) 2015, René Hermenau
+ * @copyright   Copyright (c) 2015, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       0.9.0
  */
@@ -36,7 +36,7 @@ function wpstg_clone_page() {
 	?>
 	<div id="wpstg-clonepage-wrapper">
             <span class="wp-staginglogo"><img src="<?php echo WPSTG_PLUGIN_URL . 'assets/images/logo_clean_small_212_25.png';?>"></span><span class="wpstg-version"><?php if (WPSTG_SLUG === 'wp-staging-pro') {echo 'Pro';} ?> Version <?php echo WPSTG_VERSION . ''; ?></span>
-			<div class="wpstg-header">
+			<div class="wpstg-header" style="display:none;">
 				<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwordpress.org%2Fplugins%2Fwp-staging%2F&amp;width=100&amp;layout=button&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=449277011881884" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:96px; height:20px;" allowTransparency="true"></iframe>
 				<a class="twitter-follow-button" href="https://twitter.com/wpstg" data-size="small" id="twitter-wjs" style="display: block;">Follow @wpstg</a>
                                 &nbsp;<a class="twitter-follow-button" href="https://twitter.com/renehermenau" data-size="small" id="twitter-wjs" style="display: block;">Follow @renehermenau</a>
@@ -159,7 +159,9 @@ function wpstg_scanning() {
 	$wpstg_clone_details['total_size'] = 0;
 	unset($wpstg_clone_details['large_files']);
         $folders = wpstg_scan_files(wpstg_get_clone_root_path());
-        
+//echo $folders;
+        var_dump($folders); 
+//        die();
 	array_pop($folders);
 
 	$path = wpstg_get_upload_dir() . '/remaining_files.json';
@@ -224,7 +226,7 @@ function wpstg_scanning() {
 	<?php
 	wp_die();
 }
-add_action('wp_ajax_wpstg_scanning', 'wpstg_scanning');
+//add_action('wp_ajax_wpstg_scanning', 'wpstg_scanning');
 
 /**
  * Display db tables
@@ -265,10 +267,102 @@ function wpstg_show_tables($tables, $unchecked_tables = array()) {
  * @global $wpstg_options $wpstg_options
  * @param string $path
  * @param array $folders
- * @return array
+ * @return array list of folders
  */
 function wpstg_scan_files($path, &$folders = array()) {
 	global $all_files, $wpstg_clone_details, $wpstg_options;
+        
+
+//                // Write data
+//                $file = wpstg_get_upload_dir() . '/remaining_files.json';
+//                $content = json_decode(file_get_contents($file));
+//                $data = array_merge($content, $all_files);
+//                file_put_contents($file, json_encode($data));
+
+    //$path = new RecursiveDirectoryIterator($path);
+
+    $folders = array('test');
+    $dirsize = 0;
+    $i = 0;
+    
+
+
+
+    var_dump( $folders );
+die();
+
+//$directory = new \RecursiveDirectoryIterator($path);
+//$iterator = new \RecursiveIteratorIterator($directory);
+//
+//    foreach ( $iterator as $info ) {
+//        
+//        $i++;
+//        //$folders[] = $info->getPathname();
+//        if (is_dir($info->getPathname())){
+//            $folders[] = $info->getPathname();
+//        }
+//        if (is_file($info->getPathname()) && is_readable( $info->getPathname() )){
+//            $all_files[] = utf8_encode($info->getPathname());
+//            $dirsize += filesize( $path . $entry);
+//        }
+//        $size += $info->getSize();
+//        
+//        //$tmp_path = str_replace('//', '/' ,$path . '/' . $info->getPathname() .'//'); // Make sure that directory contains ending slash / but never double slashes //
+//	//$tmp = wpstg_scan_files($tmp_path, $folders[$info->getPathname()]);
+//	$dirsize += $tmp['size'];
+//
+//        if ($i === 100){
+//            break;
+//        }
+//    }
+
+//    $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST);
+//    foreach($objects as $name => $object){
+//        $i++;
+//
+//        $object->
+//        
+//        //var_dump($object);
+//        if (is_dir( $name[0])){
+//            $folders[] = array($name);
+//        }
+//        
+////        //if (  is_dir( $name['pathName'] )){
+////        if (  is_dir( $object['"pathName":"SplFileInfo":private'] )){
+////            //$folders[] = $name['pathName'];
+////            $folders[] = $object['"pathName":"SplFileInfo":private'];
+////        }
+////        if (  !is_dir( $name['pathName'] )){
+////            //$all_files[] = $name['pathName'];
+////            //$all_files[] = $name['pathName'];
+////        }
+//        
+//        if ($i === 100){
+//            break;
+//        }
+//
+//    }
+     //$folders['size'] = $dirsize;
+     //return $folders;
+     //die();
+}
+//add_action('wp_ajax_wpstg_scanning', 'wpstg_scan_files');
+
+function createArray(&$a, $it) {
+    foreach ($it as $k => $tmp) {
+        if (is_string($tmp)) {
+            $a[] = $tmp;
+        } else {
+            $a[$k] = array();
+            createArray($a[$k], $tmp);
+        }
+    }
+}
+
+function wpstg_scan_files__($path, &$folders = array()) {
+	global $all_files, $wpstg_clone_details, $wpstg_options;
+        
+        $time = time();
 
 	$batch_size = isset($wpstg_options['wpstg_batch_size']) ? $wpstg_options['wpstg_batch_size'] : 20;
 	$batch_size *= 1024*1024;
@@ -278,15 +372,14 @@ function wpstg_scan_files($path, &$folders = array()) {
 	if (is_dir($path)) {
 		$dir = dir($path);
 		$dirsize = 0;
-                    while ( method_exists($dir,'read') && false !== ($entry = $dir->read()) ) { // works
+                    while ( method_exists($dir,'read') && false !== ($entry = $dir->read()) && time() - $time <=5) { // works
+                        
 			if ($entry == '.' || $entry == '..' || $entry == $clone)
 				continue;
 			//if ( is_file($path . $entry) && !is_null($path) && !empty($path) && !is_null($path) ) {
                         //if (is_file($path . $entry) && is_readable($path . $entry) && !is_null($path) && $path != 'null' && $path != '' && !empty($path)) {
                         if (is_file($path . $entry) && is_readable($path . $entry)) {
 				$all_files[] = utf8_encode($path . $entry);
-                                //$all_files[] = $path . $entry;
-                                //$all_files[] = $path . $entry;
 				$dirsize += filesize( $path . $entry);
 				if ($batch_size < $size = filesize($path . $entry ))
 					$wpstg_clone_details['large_files'][] = $path . $entry;

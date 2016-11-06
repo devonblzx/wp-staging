@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Allows plugins to use their own update API.
  *
- * @author Pippin Williamson, René Hermenau
+ * @author Pippin Williamson, Rene Hermenau
  * @version 1.6
  */
 class WPSTG_SL_Plugin_Updater {
@@ -359,7 +359,7 @@ class WPSTG_SL_Plugin_Updater {
     /* Get result of transient by slug
      * 
      * 
-     * @author René Hermenau   
+     * @author Rene Hermenau   
      * @scince x.x.x
      * @param $response string      
      */
