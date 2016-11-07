@@ -118,7 +118,7 @@ final class wpstgJobOptions {
         $default['copyuploads'] = TRUE;
         $default['copyrootexcludedirs'] = array('logs', 'usage');
         $default['copycontentexcludedirs'] = array('cache', 'upgrade', 'w3tc');
-        $default['copypluginsexcludedirs'] = array('backwpup', 'backwpup-pro');
+        $default['copypluginsexcludedirs'] = array('', '');
         $default['copythemesexcludedirs'] = array();
         $default['copyuploadsexcludedirs'] = array();
         $default['fileexclude'] = '.tmp,.svn,.git,desktop.ini,.DS_Store,/node_modules/';

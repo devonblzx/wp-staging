@@ -159,9 +159,7 @@ function wpstg_scanning() {
 	$wpstg_clone_details['total_size'] = 0;
 	unset($wpstg_clone_details['large_files']);
         $folders = wpstg_scan_files(wpstg_get_clone_root_path());
-//echo $folders;
-        var_dump($folders); 
-//        die();
+
 	array_pop($folders);
 
 	$path = wpstg_get_upload_dir() . '/remaining_files.json';
