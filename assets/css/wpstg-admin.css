@@ -613,3 +613,7 @@ color:#777777;
     width:400px;
     height: 500px;
 }
+
+.wpstg-form-table.form-table td fieldset label{
+    margin:0px !important;
+}

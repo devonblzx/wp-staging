@@ -29,24 +29,24 @@ class WPSTG_Folders {
         ?>
         <h3 class="title"><?php esc_html_e( 'Folders to Copy', 'wpstg' ) ?></h3>
         <p></p>
-        <table class="form-table">
+        <table class="wpstg-form-table form-table">
             <tr>
-                <th scope="row"><label for="idbackuproot"><?php esc_html_e( 'Copy WordPress folder', 'wpstg' ); ?></label></th>
+                <th scope="row"><label for="idcopyroot"><?php esc_html_e( 'Copy WordPress folder', 'wpstg' ); ?></label></th>
                 <td>
                     <input class="checkbox"
-                           type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'backuproot' ), TRUE, TRUE ); ?>
-                           name="backuproot" id="idbackuproot" value="1" /> <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), $abs_path ) ); ?>"><?php echo esc_attr( $folder ); ?></code><?php echo esc_html( $this->render_folder_size( $folder ) ); ?>
+                           type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'copyroot' ), TRUE, TRUE ); ?>
+                           name="wpstgroot" id="idcopyroot" value="1" /> <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), $abs_path ) ); ?>"><?php echo esc_attr( $folder ); ?></code><?php echo esc_html( $this->render_folder_size( $folder ) ); ?>
 
-                    <fieldset id="backuprootexcludedirs" style="padding-left:15px; margin:2px;">
+                    <fieldset id="rootexcludedirs" style="padding-left:15px; margin:2px;">
                         <?php
                         if( $folder && $dir = opendir( $folder ) ) {
                             while ( ( $file = readdir( $dir ) ) !== FALSE ) {
-                                $excludes = wpstgJobOptions::get( $main, 'backuprootexcludedirs' );
+                                $excludes = wpstgJobOptions::get( $main, 'copyrootexcludedirs' );
 
                                 if( !in_array( $file, array('.', '..'), true ) && is_dir( $folder . '/' . $file ) && !in_array( trailingslashit( $folder . '/' . $file ), $this->get_exclude_dirs( $folder ), true ) ) {
-                                    $folder_size = ($show_size === 'on') ? ' (' . size_format( $this->get_folder_size( $folder . '/' . $file ), 2 ) . ')' : '';
+                                    $folder_size = ($show_size === 'on') ? ' (' . size_format( wpstgFile::get_folder_size( $folder . '/' . $file ), 2 ) . ')' : '';
 
-                                    echo '<nobr><label for="idrootexcludedirs-' . sanitize_file_name( $file ) . '"><input class="checkbox" type="checkbox"' . checked( in_array( $file, $excludes, true ), FALSE, FALSE ) . ' name="backuprootexcludedirs[]" id="idrootexcludedirs-' . sanitize_file_name( $file ) . '" value="' . esc_attr( $file ) . '" /> ' . esc_html( $file ) . esc_html( $this->render_folder_size( $folder ) ) . '</label><br /></nobr>';
+                                    echo '<nobr><label for="idrootexcludedirs-' . sanitize_file_name( $file ) . '"><input class="checkbox" type="checkbox"' . checked( in_array( $file, $excludes, true ), FALSE, FALSE ) . ' name="copyrootexcludedirs[]" id="idrootexcludedirs-' . sanitize_file_name( $file ) . '" value="' . esc_attr( $file ) . '" /> ' . esc_html( $file ) . esc_html( $this->render_folder_size( $folder ) ) . '</label><br /></nobr>';
                                 }
                             }
                             closedir( $dir );
@@ -56,13 +56,50 @@ class WPSTG_Folders {
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="idbackuproot"><?php esc_html_e( 'Copy Content folder', 'wpstg' ); ?></label></th>
+                <th scope="row"><label for="idcopycontent"><?php esc_html_e( 'Copy Content folder', 'wpstg' ); ?></label></th>
                 <td>
-                    <input class="checkbox" type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'backupcontent' ), TRUE, TRUE ); ?> name="backupcontent" id="idbackupcontent" value="1" /> 
+                    <input class="checkbox" type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'copycontent' ), TRUE, TRUE ); ?> name="copycontent" id="idcopycontent" value="1" /> 
                     <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), WP_CONTENT_DIR ) ); ?>"><?php echo esc_attr( WP_CONTENT_DIR ); ?></code><?php echo esc_html( $this->render_folder_size( WP_CONTENT_DIR ) ); ?>
-                    <fieldset id="backupcontentexcludedirs" style="padding-left:15px; margin:2px;">
-                        <?php echo $this->render_subfolder( $main, WP_CONTENT_DIR, 'backupcontent' ); ?>
+                    <fieldset id="copycontentexcludedirs" style="padding-left:15px; margin:2px;">
+                        <?php echo $this->render_subfolder( $main, WP_CONTENT_DIR, 'copycontent' ); ?>
                     </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="idcopyplugins"><?php esc_html_e( 'Copy Plugins Folder', 'wpstg' ); ?></label></th>
+                <td>
+                    <input class="checkbox" type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'copyplugins' ), TRUE, TRUE ); ?> name="copyplugins" id="idcopyplugins" value="1" /> 
+                    <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), WP_PLUGIN_DIR ) ); ?>"><?php echo esc_attr( WP_PLUGIN_DIR ); ?></code><?php echo esc_html( $this->render_folder_size( WP_PLUGIN_DIR ) ); ?>
+                    <fieldset id="copycontentexcludedirs" style="padding-left:15px; margin:2px;">
+                        <?php echo $this->render_subfolder( $main, WP_PLUGIN_DIR, 'copyplugins' ); ?>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="idcopythemes"><?php esc_html_e( 'Copy Theme folder', 'wpstg' ); ?></label></th>
+                <td>
+                    <input class="checkbox" type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'copythemes' ), TRUE, TRUE ); ?> name="copythemes" id="idcopythemes" value="1" /> 
+                    <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), get_theme_root() ) ); ?>"><?php echo esc_attr( get_theme_root() ); ?></code><?php echo esc_html( $this->render_folder_size( get_theme_root() ) ); ?>
+                    <fieldset id="copycontentexcludedirs" style="padding-left:15px; margin:2px;">
+                        <?php echo $this->render_subfolder( $main, get_theme_root(), 'copythemes' ); ?>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="idcopyuploads"><?php esc_html_e( 'Copy Uploads folder', 'wpstg' ); ?></label></th>
+                <td>
+                    <input class="checkbox" type="checkbox"<?php checked( wpstgJobOptions::get( $main, 'copyuploads' ), TRUE, TRUE ); ?> name="copyuploads" id="idcopyuploads" value="1" /> 
+                    <code title="<?php echo esc_attr( sprintf( __( 'Path as set by user (symlink?): %s', 'wpstg' ), wpstgFile::get_upload_dir() ) ); ?>"><?php echo esc_attr( wpstgFile::get_upload_dir() ); ?></code><?php echo esc_html( $this->render_folder_size( wpstgFile::get_upload_dir() ) ); ?>
+                    <fieldset id="copycontentexcludedirs" style="padding-left:15px; margin:2px;">
+                        <?php echo $this->render_subfolder( $main, wpstgFile::get_upload_dir(), 'copyuploads' ); ?>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="dirinclude"><?php esc_html_e( 'Extra folders to backup', 'wpstg' ); ?></label></th>
+                <td>
+                    <textarea name="dirinclude" id="dirinclude" class="text code" rows="7" cols="50"><?php echo esc_attr( wpstgJobOptions::get( $main, 'dirinclude' ) ); ?></textarea>
+	            <p class="description"><?php esc_attr_e( 'Separate folder names with a line-break or a comma. Folders must be set with their absolute path!', 'backwpup' )?></p>
                 </td>
             </tr>
         </table>
@@ -84,8 +121,7 @@ class WPSTG_Folders {
 
                 if( !in_array( $file, array('.', '..'), true ) && is_dir( $folder . '/' . $file ) && !in_array( trailingslashit( $folder . '/' . $file ), $this->get_exclude_dirs( $folder ), true ) ) {
                     $title = '';
-
-                    $html .= '<nobr><label for="' . $name . 'excludedirs-' . sanitize_file_name( $file ) . '"><input class="checkbox" type="checkbox"' . checked( in_array( $file, $excludes, true ), FALSE, FALSE ) . ' name="' . $name . 'excludedirs[]" id="' . $name . 'excludedirs-' . sanitize_file_name( $file ) . '" value="' . esc_attr( $file ) . '"' . $title . ' /> ' . esc_html( $file ) . esc_html( $this->render_folder_size( $folder ) ) . '</label><br /></nobr>';
+                    $html .= '<nobr><label for="' . $name . 'excludedirs-' . sanitize_file_name( $file ) . '"><input class="checkbox" type="checkbox"' . checked( in_array( $file, $excludes, true ), FALSE, FALSE ) . ' name="' . $name . 'excludedirs[]" id="' . $name . 'excludedirs-' . sanitize_file_name( $file ) . '" value="' . esc_attr( $file ) . '" /> ' . esc_html( $file ) . esc_html( $this->render_folder_size( $folder . '/' . $file ) ) . '</label><br /></nobr>';
                 }
             }
             return $html;
@@ -110,13 +146,13 @@ class WPSTG_Folders {
         }
 
         $folder = untrailingslashit( str_replace( '\\', '/', $folder ) );
-        $folder_size = (!empty( $wpstg_options['folder_size'] )) ? ' (' . size_format( $this->get_folder_size( $folder, FALSE ), 2 ) . ')' : '';
+        $folder_size = (!empty( $wpstg_options['folder_size'] )) ? ' (' . size_format( wpstgFile::get_folder_size( $folder, FALSE ), 2 ) . ')' : '';
         return $folder_size;
     }
 
     /**
      *
-     * Get sub folder to exclude from a given folder
+     * Get exclude specific folder from a given parent folder
      *
      * @param $folder string folder to check for excludes
      *
@@ -138,39 +174,6 @@ class WPSTG_Folders {
         return array_unique( $excludedir );
     }
 
-    /**
-     *
-     * get size of files in folder
-     *
-     * @param string $folder the folder to calculate
-     * @param bool $deep went thrue suborders
-     * @return int folder size in byte
-     */
-    public static function get_folder_size( $folder, $deep = TRUE ) {
-        $files_size = 0;
-        if( !is_readable( $folder ) )
-            return $files_size;
-        if( $dir = opendir( $folder ) ) {
-            while ( FALSE !== ( $file = readdir( $dir ) ) ) {
-                if( in_array( $file, array('.', '..'), true ) || is_link( $folder . '/' . $file ) ) {
-                    continue;
-                }
-                if( $deep && is_dir( $folder . '/' . $file ) ) {
-                    $files_size = $files_size + self::get_folder_size( $folder . '/' . $file, TRUE );
-                } elseif( is_link( $folder . '/' . $file ) ) {
-                    continue;
-                } elseif( is_readable( $folder . '/' . $file ) ) {
-                    $file_size = filesize( $folder . '/' . $file );
-                    if( empty( $file_size ) || !is_int( $file_size ) ) {
-                        continue;
-                    }
-                    $files_size = $files_size + $file_size;
-                }
-            }
-            closedir( $dir );
-        }
-        return $files_size;
-    }
 
 }
 

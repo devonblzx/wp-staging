@@ -109,21 +109,21 @@ final class wpstgJobOptions {
     public static function defaults_job( $key = '' ) {
         $key = sanitize_key( trim( $key ) );
         //set defaults
-        $default['backupexcludethumbs'] = FALSE;
-        $default['backupspecialfiles'] = TRUE;
-        $default['backuproot'] = TRUE;
-        $default['backupcontent'] = TRUE;
-        $default['backupplugins'] = TRUE;
-        $default['backupthemes'] = TRUE;
-        $default['backupuploads'] = TRUE;
-        $default['backuprootexcludedirs'] = array('logs', 'usage');
-        $default['backupcontentexcludedirs'] = array('cache', 'upgrade', 'w3tc');
-        $default['backuppluginsexcludedirs'] = array('backwpup', 'backwpup-pro');
-        $default['backupthemesexcludedirs'] = array();
-        //$default['backupuploadsexcludedirs'] = array(basename( $log_folder ));
+        $default['copyexcludethumbs'] = FALSE;
+        $default['copyspecialfiles'] = TRUE;
+        $default['copyroot'] = TRUE;
+        $default['copycontent'] = TRUE;
+        $default['copyplugins'] = TRUE;
+        $default['copythemes'] = TRUE;
+        $default['copyuploads'] = TRUE;
+        $default['copyrootexcludedirs'] = array('logs', 'usage');
+        $default['copycontentexcludedirs'] = array('cache', 'upgrade', 'w3tc');
+        $default['copypluginsexcludedirs'] = array('backwpup', 'backwpup-pro');
+        $default['copythemesexcludedirs'] = array();
+        $default['copyuploadsexcludedirs'] = array();
         $default['fileexclude'] = '.tmp,.svn,.git,desktop.ini,.DS_Store,/node_modules/';
         $default['dirinclude'] = '';
-        $default['backupabsfolderup'] = FALSE;
+        $default['copyabsfolderup'] = FALSE;
 
         //return all
         if( empty( $key ) ) {
