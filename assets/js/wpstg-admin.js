@@ -12,6 +12,70 @@
 // Cloning workflow
 (function ($) {
     $(document).ready(function () {
+        
+    /**
+     * The CloneID
+     */
+         
+    var cloneID;
+
+    /**
+     * Create list of folders
+     * @todo rename function
+     * @returns {undefined}
+     */
+    function create_file_list() {
+        setTimeout(function () { // timeout of x sec - prevent security blocks and cpu overload
+            var data = {
+                action: 'wpstg_create_files',
+                nonce: wpstg.nonce,
+            };
+            data.folder = get_folders_to_copy();
+            //console.log(data);
+            $.post(ajaxurl, data, function (resp, status, xhr) {
+                if (isCanceled) {
+                    cancelCloning();
+                    return false;
+                }
+
+                if (!wpstgIsJsonObj(resp)) { //Unknown error
+                    wpstg_show_error_die('Fatal Error: This should not happen. Please try again! <br> If restarting does not work <a href="https://wordpress.org/support/plugin/wp-staging" target="blank">get in contact with us</a> ');
+                } else if (resp.percent < 0) { //Fail
+                    wpstg_show_error_die('Fatal Error: This should never happen. Please try again! <br>If restarting does not work <a href="https://wordpress.org/support/plugin/wp-staging" target="blank">get in contact with us</a> '.xhr.statusText);
+                } else if (resp.percent < 1) { //Continue copying
+                    var complete = Math.floor(resp.percent * 100) + '%';
+                    $('#wpstg-files-progress').text(complete).css('width', complete);
+                    $('#wpstg-workflow').text(resp.message + ' ' + 'Status: ' + resp.percent * 100 + '%');
+                    $('#wpstg-loader').show();
+                    if (resp.message !== '')
+                        $('#wpstg-log-details').append(resp.message + '<br>');
+                    wpstg_logscroll_bottom();
+                    create_file_list();
+                } else { //Success creating
+                    $('#wpstg-workflow').text(resp.message + ' ' + 'Status: ' + resp.percent * 100 + '%');
+                    $('#wpstg-files-progress').text('').css('width', '100%');
+                    $('#wpstg-loader').hide();
+                    wpstg_logscroll_bottom();
+                }
+            }).fail(function (xhr) { // Will be executed when $.post() fails
+                wpstg_show_error_die('Fatal Error: This should not happen but is most often caused by other plugins. Try first the option "Optimizer" in WP Staging->Settings and try again. If this does not help, enable <a href="https://codex.wordpress.org/Debugging_in_WordPress" target="_blank">wordpress debug mode</a> to find out which plugin is causing this:<br> ' + xhr.status + ' ' + xhr.statusText);
+                console.log(xhr.statusText);
+            });
+        }, wpstg.cpu_load); // timeout of x sec - prevent security blocks and cpu overload
+    }
+
+    /**
+     * Get all checked folders
+     * @returns array
+     */
+    function get_folders_to_copy() {
+        var folders = [];
+        $('.wpstg-dir input:checked').each(function () {
+            // included folders
+            return folders.push($(this).attr('data-wpstg-path'));
+        });
+    }
+        
 
         // Unselect/select all db tables    
         var ischecked = true;
@@ -192,21 +256,32 @@
                 action: $(this).data('action'),
                 nonce: wpstg.nonce
             };
+
             if (data.action == 'wpstg_cloning') {
                 data.cloneID = $('#wpstg-new-clone-id').val() || new Date().getTime();
                 wpstg_additional_data(data, false);
             }
+            
+            if (data.action === 'wpstg_create_files') {
+                data.cloneID = $('#wpstg-new-clone-id').val() || new Date().getTime();
+                wpstg_additional_data(data, false)
+                //console.log(data.Folders);
+            }
 
             $('#wpstg-workflow').load(ajaxurl, data, function (response, status, xhr) {
-                if (status == 'error') { //Unknown error
+                if (status == 'error') {
                     console.log(xhr.status + ' ' + xhr.statusText);
                     wpstg_show_error_die('Fatal Error: This should not happen but is most often caused by other plugins. Try first the option "Optimizer" in WP Staging->Settings and try again. If this does not help, enable <a href="https://codex.wordpress.org/Debugging_in_WordPress" target="_blank">wordpress debug mode</a> to find out which plugin is causing this: ' + xhr.status + ' ' + xhr.statusText);
                 }
                 $('#wpstg-workflow').removeClass('loading');
                 $('.wpstg-current-step').removeClass('wpstg-current-step')
                         .next('li').addClass('wpstg-current-step');
+                
                 if (data.action == 'wpstg_cloning') {
                     clone_db();
+                }
+                if (data.action == 'wpstg_create_files') {
+                    create_file_list();
                 }
             });
         });
@@ -232,16 +307,31 @@
             });
         });
 
-        var cloneID;
+
+        /**
+         * Get post data from unchecked folders for db tables and folders
+         * 
+         * @param array data
+         * @param {type} isRemoving
+         * @returns false
+         */
         function wpstg_additional_data(data, isRemoving) {
             data.uncheckedTables = [];
             $('.wpstg-db-table input:not(:checked)').each(function () {
+                // excluded db tables
                 data.uncheckedTables.push(this.name);
             });
             data.excludedFolders = [];
             $('.wpstg-dir input:not(:checked)').each(function () {
+                // exluded folders
                 if (!$(this).parent('.wpstg-dir').parents('.wpstg-dir').children('.wpstg-expand-dirs').hasClass('disabled'))
-                    data.excludedFolders.push(this.name);
+                    data.excludedFolders.push($(this).attr('data-wpstg-path'));
+                    //data.excludedFolders.push(this.name);
+            });
+            data.Folders = [];
+            $('.wpstg-dir input:checked').each(function () {
+                // included folders
+                data.Folders.push($(this).attr('data-wpstg-path'));
             });
 
             cloneID = data.cloneID.toString();
@@ -255,7 +345,6 @@
             $('#wpstg-workflow').addClass('loading');
             var data = {
                 action: 'wpstg_scanning',
-                //action: 'wpstg_get_dirs',
                 clone: $(this).data('clone'),
                 nonce: wpstg.nonce 
             };
@@ -440,6 +529,7 @@
             }, wpstg.cpu_load); // timeout of x sec - prevent security blocks and cpu overload
         }
 
+
         var isFinished = false;
         function replace_links() {
             var data = {
@@ -507,6 +597,10 @@
          * @return void
          */
         function wpstg_logscroll_bottom() {
+            if ($('#wpstg-log-details').length === 0){
+                return false;
+            }
+            
             var $mydiv = $('#wpstg-log-details');
             $mydiv.scrollTop($mydiv[0].scrollHeight);
         }
@@ -628,25 +722,28 @@
         });
 
         /**
-         * Directory structure
+         * Toggle Directory structure
          */
-        $('#wpstg-workflow').on('click', '.wpstg-expand-dirs', function (e) {
-            e.preventDefault();
-            if (!$(this).hasClass('disabled'))
-                $(this).siblings('.wpstg-subdir').slideToggle();
-        });
+//        $('#wpstg-workflow').on('click', '.wpstg-expand-dirs', function (e) {
+//            e.preventDefault();
+//            if (!$(this).hasClass('disabled'))
+//                $(this).siblings('.wpstg-subdir').slideToggle();
+//        });
 
 
         $('#wpstg-workflow').on('change', '.wpstg-check-dir', function () {
             var dir = $(this).parent('.wpstg-dir');
             if (this.checked) {
+                $(this).attr('checked', 'checked');
                 dir.parents('.wpstg-dir').children('.wpstg-check-dir').attr('checked', 'checked');
                 dir.find('.wpstg-expand-dirs').removeClass('disabled');
-                dir.find('.wpstg-subdir .wpstg-check-dir').attr('checked', 'checked');
+                dir.find('.checkbox.wpstg-dir.wpstg-subdir').attr('checked', 'checked');
+                dir.children('.wpstg-subdir').show();
             } else {
-                dir.find('.wpstg-dir .wpstg-check-dir').removeAttr('checked');
+                dir.find('.wpstg-check-dir').removeAttr('checked');
                 dir.find('.wpstg-expand-dirs, .wpstg-check-subdirs').addClass('disabled');
                 dir.find('.wpstg-check-subdirs').data('action', 'check').text('check');
+                dir.find('.checkbox.wpstg-dir.wpstg-subdir').removeAttr('checked');
                 dir.children('.wpstg-subdir').slideUp();
             }
         });

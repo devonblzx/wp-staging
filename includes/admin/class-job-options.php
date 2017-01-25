@@ -122,7 +122,7 @@ final class wpstgJobOptions {
         $default['copythemesexcludedirs'] = array();
         $default['copyuploadsexcludedirs'] = array();
         $default['fileexclude'] = '.tmp,.svn,.git,desktop.ini,.DS_Store,/node_modules/';
-        $default['dirinclude'] = '';
+        //$default['dirinclude'] = '';
         $default['copyabsfolderup'] = FALSE;
 
         //return all

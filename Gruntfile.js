@@ -115,7 +115,7 @@ module.exports = function(grunt) {
         browserSync: {
                         dev: {
                             bsFiles: {
-                                src: ['**','wp-content/plugins/**/*.php', '**.php', '*.php']
+                                src: ['**','wp-content/plugins/**/*.php', '**.php', '*.php', '**.js.', '*.js', '**.css', '*.css']
                             },
                             options: {
                                 proxy: "http://src.wordpress-develop.dev/wp-admin/admin.php?page=wpstg_clone",
