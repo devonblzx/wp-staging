@@ -255,5 +255,5 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-1.1.0 <strong>Compatible up to WP 4.6</strong>
+= 1.1.3 =
+1.1.3 <strong>Compatible up to WP 4.7.2</strong>
