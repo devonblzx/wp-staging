@@ -38,7 +38,7 @@ if ( !defined('WPSTG_VERSION') ) {
 }
 // Is compatible up to WordPress version
 if ( !defined('WPSTG_WP_COMPATIBLE') ) {
-    define('WPSTG_WP_COMPATIBLE', '4.7');
+    define('WPSTG_WP_COMPATIBLE', '4.7.2');
 }
 
 // Plugin Folder Path
