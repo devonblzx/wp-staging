@@ -143,9 +143,8 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 
 == Changelog ==
 
-{{ version }}
-* New: Tested up to WP 4.7.2
-
+= {{ version }} =
+* Fix: Tested up to wp 4.7.2
 
 = 1.1.2 = 
 * Fix: Settings are not deleted when plugin is removed

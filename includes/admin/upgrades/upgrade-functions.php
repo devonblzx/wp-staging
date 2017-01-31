@@ -62,3 +62,22 @@ function wpstg_update_v1() {
     wpstg_create_remaining_files();
     wpstg_create_clonedetails_files();
 }
+
+/**
+ * 
+ * @return mixed string | bool false name of the theme if theme is a known commercial theme
+ */
+function wpstg_is_commercial_theme() {
+
+    // Get current theme name
+    $my_theme = wp_get_theme();
+
+    // Known commercial themes which are using WP QUADS
+    $themes = array('Bunchy', 'Bimber', 'boombox', 'Boombox');
+
+    if( is_object( $my_theme ) && in_array( $my_theme->get( 'Name' ), $themes ) ) {
+        return $my_theme->get( 'Name' );
+    }
+
+    return false;
+}
