@@ -5,7 +5,7 @@
  *
  * @package     WPSTG
  * @subpackage  Admin/Upgrades
- * @copyright   Copyright (c) 2016, Ren´é Hermenau
+ * @copyright   Copyright (c) 2016, Ren´e Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.1.2
  */

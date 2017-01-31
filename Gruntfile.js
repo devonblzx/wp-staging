@@ -1,4 +1,5 @@
 /* local path for wp-staging git repository
+ * 
 cd "s:\github\wp-staging"
  * 
  */
@@ -109,7 +110,20 @@ module.exports = function(grunt) {
                 //dest: '../../',
                 //expand: true
             }
-        }
+        },
+        
+        browserSync: {
+                        dev: {
+                            bsFiles: {
+                                src: ['**','wp-content/plugins/**/*.php', '**.php', '*.php', '**.js.', '*.js', '**.css', '*.css']
+                            },
+                            options: {
+                                proxy: "http://src.wordpress-develop.dev/wp-admin/admin.php?page=wpstg_clone",
+                                //open: true,
+                                //watchTask: true
+                            }
+                        }
+                    }
 
 
     });
@@ -119,9 +133,13 @@ module.exports = function(grunt) {
     
     // Display task timing
     require('time-grunt')(grunt);
+    
+        grunt.loadNpmTasks('grunt-browser-sync');
 
     // Build task
     //grunt.registerTask( 'build', [ 'compress:build' ]);
     grunt.registerTask( 'build', [ 'clean:build', 'uglify:build', 'copy:build', 'string-replace:version', 'compress:build' ]);
+    grunt.registerTask( 'dev', ['browserSync:dev']);
+
     //grunt.registerTask('build', [ 'string-replace:version' ]);
 };

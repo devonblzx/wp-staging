@@ -4,7 +4,7 @@
  *
  * @package     WPSTG
  * @subpackage  Admin/Notices
- * @copyright   Copyright (c) 2015, René Hermenau
+ * @copyright   Copyright (c) 2015, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0
 */
@@ -76,7 +76,7 @@ function wpstg_admin_messages() {
     {
 	 echo '<div class="wpstg_fivestar updated" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
     	<p>Awesome, you\'ve been using <strong>WP Staging </strong> for more than 1 week. May i ask you to give it a <strong>5-star</strong> rating on Wordpress? 
-        <p><strong>Regards,<br>René Hermenau</strong>
+        <p><strong>Regards,<br>Rene Hermenau</strong>
         <ul>
             <li><a href="https://wordpress.org/support/plugin/wp-staging/reviews/?filter=5#new-post" class="thankyou" target="_new" title="Ok, you deserved it" style="font-weight:bold;">Ok, you deserved it</a></li>
             <li><a href="javascript:void(0);" class="wpstg_hide_rating" title="I already did" style="font-weight:bold;">I already did</a></li>
@@ -138,7 +138,7 @@ function wpstg_start_poll(){
 	 echo '<div class="wpstg_poll update-nag" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
     	<p>Great, You are using <strong>WP Staging</strong> for a while. Hope you are happy with it.<br><br>Are you interested in copying changes from WPStaging staging site back to your live site?
         <br><br>Click on the <a href="" target="_blank"><i>Yes, i am interested</i></a> Button and fill out the poll!<br>It only takes one (1) minute of your time - I promise!
-        <br><br>Cheers,<br>René
+        <br><br>Cheers,<br>Rene
         <ul>
             <li class="float:left"><a href="https://docs.google.com/forms/d/e/1FAIpQLScZ-dO5WffV3xObn16LwG05tr1HrADD_8L4wbTxPHqoPssVcg/viewform?c=0&w=1&usp=mail_form_link" class="thankyou button button-primary" target="_new" title=Yes, i am interested" style="color: #ffffff;font-weight: normal;margin-right:10px;float:left;">Yes, i am interested</a></li>
             <li><a href="javascript:void(0);" class="wpstg_hide_poll" title="Close It" style="vertical-align:middle;">Do Not Ask Again</a></li>
@@ -171,7 +171,7 @@ function wpstg_start_poll(){
 /* Hide the poll notice
  * 
  * @subpackage  Admin/Notices
- * @copyright   Copyright (c) 2016, René Hermenau
+ * @copyright   Copyright (c) 2016, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.1.0
  * 
@@ -209,7 +209,7 @@ function wpstg_plugin_deactivated_notice() {
 /* Hide the rating div
  * 
  * @subpackage  Admin/Notices
- * @copyright   Copyright (c) 2015, René Hermenau
+ * @copyright   Copyright (c) 2015, Rene Hermenau
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       0.9.0
  * 

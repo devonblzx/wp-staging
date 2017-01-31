@@ -3,7 +3,7 @@
 Plugin Name: WP Staging Optimizer
 Plugin URI: https://wp-staging.com
 Description: Prevents 3rd party plugins from being loaded during WP Staging specific operations
-Author: René Hermenau
+Author: Rene Hermenau
 Version: 1.0
 Author URI: https://wp-staging.com
 Credit: Original version is made by Delicious Brains (WP Migrate DB). Thank you guys!

@@ -4,7 +4,7 @@
  * Plugin Name: WP Staging
  * Plugin URI: wordpress.org/plugins/wp-staging
  * Description: Create a staging clone site for testing & developing
- * Author: WP-Staging, René Hermenau
+ * Author: WP-Staging, Rene Hermenau
  * Author URI: https://wordpress.org/plugins/wp-staging
  * Version: {{ version }}
  * Text Domain: wpstg
@@ -26,7 +26,7 @@
  *
  * @package WPSTG
  * @category Core
- * @author René Hermenau
+ * @author Rene Hermenau
  */
 // Exit if accessed directly
 if ( !defined('ABSPATH') )
@@ -138,8 +138,8 @@ if ( !class_exists('wpstaging') ) :
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/tools.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/upload-functions.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/class-wpstg-license-handler.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.interface.php';
-                require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.class.php';
+                #require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.interface.php';
+                #require_once WPSTG_PLUGIN_DIR . 'includes/debug/classes/wpstgDebug.class.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/wpstg-sanitize.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/template-functions.php';
                 require_once WPSTG_PLUGIN_DIR . 'includes/admin/error-handling.php';

@@ -508,6 +508,7 @@ color:#777777;
 
 .wpstg-tab-triangle {
 	display: inline-block;
+        font-family: arial;
 	margin-right: 10px;
 }
 
@@ -538,7 +539,7 @@ color:#777777;
 
 /* tmp */
 .wpstg-subdir {
-	display: none;
+        display:block;
 	margin-left: 20px;
 }
 
@@ -612,4 +613,8 @@ color:#777777;
 .wpstg-sysinfo {
     width:400px;
     height: 500px;
+}
+
+.wpstg-form-table.form-table td fieldset label{
+    margin:0px !important;
 }

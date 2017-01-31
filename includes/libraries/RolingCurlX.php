@@ -2,7 +2,7 @@
 /*
  * Based on RollingCurlX https://github.com/marcushat/rollingcurlx
  * 
- * Modified for WP-Staging by René Hermenau to be compatible with php 5.3 and older versions
+ * Modified for WP-Staging by Rene Hermenau to be compatible with php 5.3 and older versions
  * 
  * @scince 2.2.7
 */

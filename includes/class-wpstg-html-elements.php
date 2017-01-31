@@ -6,7 +6,7 @@
  *
  * @package     WPSTG
  * @subpackage  Classes/HTML
- * @copyright   Copyright (c) 2015, René Hermenau, Pippin Williamsen
+ * @copyright   Copyright (c) 2015, Rene Hermenau, Pippin Williamsen
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       0.9.0
  */
