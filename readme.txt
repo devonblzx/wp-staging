@@ -144,6 +144,9 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 == Changelog ==
 
 = {{ version }} =
+* Fix: Fatal error Unsupported operand types
+
+= 1.1.3 =
 * New: Tested up to wp 4.7.2
 * Fix: Arrows in drop down for folder selection are distorted
 * Tweak: Show working log as default to make debugging easier

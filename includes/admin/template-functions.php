@@ -376,11 +376,16 @@ function wpstg_directory_structure($folders, $path = null, $not_checked = false,
  * @return string
  */
 function wpstg_short_size($size) {
-	if (1 < $out = $size / 1000000000)
+    
+    if (!is_int((int)$size)){
+        return 0;
+    }
+    
+	if (1 < $out = (int)$size / 1000000000)
 		return round($out, 2) . ' Gb';
-	else if (1 < $out = $size / 1000000)
+	else if (1 < $out = (int)$size / 1000000)
 		return round($out, 2) . ' Mb';
-	else if (1 < $out = $size / 1000)
+	else if (1 < $out = (int)$size / 1000)
 		return round($out, 2) . ' Kb';
 	return $size . ' bytes';
 }
