@@ -184,17 +184,17 @@ class Files extends JobExecutableWithCommandLine
         }
 
 
-        // We can use exec
-        if (true === $this->canUseExec)
-        {
-            return $this->copyFileWithExec($file, $destination);
-        }
-
-        // We can use popen
-        if (true === $this->canUsePopen)
-        {
-            return $this->copyFileWithPopen($file, $destination);
-        }
+//        // We can use exec
+//        if (true === $this->canUseExec)
+//        {
+//            return $this->copyFileWithExec($file, $destination);
+//        }
+//
+//        // We can use popen
+//        if (true === $this->canUsePopen)
+//        {
+//            return $this->copyFileWithPopen($file, $destination);
+//        }
 
         // Good old PHP
         return $this->copyFileWithPHP($file, $destination);
