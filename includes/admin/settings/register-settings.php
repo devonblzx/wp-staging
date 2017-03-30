@@ -194,7 +194,7 @@ function wpstg_get_registered_settings() {
                                                         'debug_mode' => array(
                                                             'id' => 'debug_mode',
                                                             'name' => __( 'Debug Mode', 'mashsb' ),
-                                                            'desc' => __( 'This will enable an extended debug mode which creates additional entries in <strong>wp-content/wp-staging/logs</strong>. Please enable this when we ask you to do so.', 'mashsb' ),
+                                                            'desc' => __( 'This will enable an extended debug mode which creates additional entries in <strong>wp-content/uploads/wp-staging/logs</strong>. Please enable this when we ask you to do so.', 'mashsb' ),
                                                             'type' => 'checkbox'
                                                         ),
                                                         'uninstall_on_delete' => array(
@@ -784,7 +784,7 @@ add_filter( 'option_page_capability_wpstg_settings', 'wpstg_set_settings_cap' );
 function wpstg_log_permissions(){
     global $wpstg_options;
     if (!WPSTG()->logger->checkDir() ){
-        return '<br><strong style="color:red;">' . __('Log file directory not writable! Set FTP permission to 755 or 777 for /wp-content/plugins/wp-staging/logs/', 'wpstg') . '</strong> <br> Read here more about <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">file permissions</a> ';
+        return '<br><strong style="color:red;">' . __('Log file directory not writable! Set FTP permission to 755 or 777 for /wp-content/uploads/wp-staging/logs/', 'wpstg') . '</strong> <br> Read here more about <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">file permissions</a> ';
     }
 }
 

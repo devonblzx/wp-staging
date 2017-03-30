@@ -20,8 +20,8 @@ class wpstgLogger {
 	{
 		$this->file = $file;
 		$this->level = $level;
-		$this->path = str_replace('\\', '/', WPSTG_PLUGIN_DIR . "logs/$this->file");
-                $this->folder = str_replace('\\', '/', WPSTG_PLUGIN_DIR . "logs");
+		$this->path = str_replace('\\', '/', wpstg_get_upload_dir() . "logs/$this->file");
+                $this->folder = str_replace('\\', '/', wpstg_get_upload_dir() . "logs");
 		$this->start();
 	}
 	

@@ -8,7 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: staging, duplication, cloning, clone, migration, sandbox, test site, testing, backup, post, admin, administration, duplicate posts
 Requires at least: 3.6+
-Tested up to: 4.7.2
+Tested up to: 4.7.9
 Stable tag: {{ version }}
 
 A duplicator plugin! Clone, duplicate and migrate live sites to independent staging and development sites that are available only to administrators.
@@ -144,6 +144,11 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 == Changelog ==
 
 = {{ version }} =
+* Fix: Admin notice is throwing a false positive write permission error
+* New: Move log folder to wp-content/uploads/wp-staging/logs
+* New: Tested up to WP 4.7.3
+
+= 1.1.4 =
 * Fix: Fatal error Unsupported operand types
 
 = 1.1.3 =
