@@ -1641,7 +1641,7 @@ function wpstg_get_log_data($progress){
      return $log_data_header =  '###########################################<br>'
                               . '&nbsp;&nbsp;&nbsp; WP Staging working log              <br>'
                               . '&nbsp;&nbsp;&nbsp; You find all log files in:          <br>'
-                              . '&nbsp;&nbsp;&nbsp; wp-content/plugins/wp-staging/logs  <br>'
+                              . '&nbsp;&nbsp;&nbsp; wp-content/uploads/wp-staging/logs  <br>'
                               . '###########################################<br>';
             } else {
                 return '';

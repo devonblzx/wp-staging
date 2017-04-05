@@ -49,8 +49,9 @@ function wpstg_is_admin_page() {
 	
 	global $wpstg_parent_page, $pagenow, $typenow, $wpstg_settings_page, $wpstg_add_ons_page, $wpstg_tools_page, $wpstg_clone_page;
 
-	if ( 'wpstg-settings' == $currentpage || 'wpstg-addons' == $currentpage || 'wpstg-tools' == $currentpage || 'wpstg-clone' == $currentpage || 'wpstg_clone' == $currentpage) {
-                //mashdebug()->info("wpstg_is_admin_page() = true");
+        if ( 'wpstg-settings' == $currentpage || 'wpstg-addons' == $currentpage || 'wpstg-tools' == $currentpage || 'wpstg_clone' == $currentpage) {
 		return true;      
-	}     
+	}    
+        
+        return false;
 }
