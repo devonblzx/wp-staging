@@ -34,11 +34,11 @@ if ( !defined('ABSPATH') )
 
 // Plugin version
 if ( !defined('WPSTG_VERSION') ) {
-    define('WPSTG_VERSION', '1.1.4');
+    define('WPSTG_VERSION', '1.1.5');
 }
 // Is compatible up to WordPress version
 if ( !defined('WPSTG_WP_COMPATIBLE') ) {
-    define('WPSTG_WP_COMPATIBLE', '4.7.3');
+    define('WPSTG_WP_COMPATIBLE', '4.7.4');
 }
 
 // Plugin Folder Path
