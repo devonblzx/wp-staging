@@ -144,6 +144,9 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 == Changelog ==
 
 = {{ version }} =
+* New: Add link to WP Staging Beta Version 2.0.1
+
+= 1.1.5 =
 * Fix: Admin notice is throwing a false positive write permission error
 * New: Move log folder to wp-content/uploads/wp-staging/logs
 * New: Tested up to WP 4.7.3

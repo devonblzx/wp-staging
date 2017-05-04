@@ -34,7 +34,7 @@ if ( !defined('ABSPATH') )
 
 // Plugin version
 if ( !defined('WPSTG_VERSION') ) {
-    define('WPSTG_VERSION', '1.1.5');
+    define('WPSTG_VERSION', '1.1.6');
 }
 // Is compatible up to WordPress version
 if ( !defined('WPSTG_WP_COMPATIBLE') ) {
