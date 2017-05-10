@@ -15,7 +15,7 @@ A duplicator plugin! Clone, duplicate and migrate live sites to independent stag
 
 == Description == 
 
-<strong>This cloning and staging plugin is well tested but still work in progress! <br>
+<strong>This cloning and staging plugin is well tested but still work in progress! <br><br>
 If you find a bug please open a ticket in the [support request](https://wordpress.org/support/plugin/wp-staging/ "support forum"). Every issue will be fixed asap!
 </strong>
 <br /><br />
@@ -24,6 +24,10 @@ Please let us know your most requested feature and use our quick poll. It only t
 [Start the Poll](https://docs.google.com/forms/d/e/1FAIpQLScZ-dO5WffV3xObn16LwG05tr1HrADD_8L4wbTxPHqoPssVcg/viewform?c=0&w=1&usp=mail_form_link "wp staging poll")
 <br /> <br />
 
+If you want to support development please download latest <strong>beta version 2.0.1</strong>: [https://wp-staging.com/beta.php](https://wp-staging.com/beta.php "download beta")
+Version 2.0.1 is able to handle even the largest WordPress sites. Please send your feedback to support [at] wp-staging.com or via contact form [https://wp-staging.com/support/](https://wp-staging.com/support/ "support beta version")
+
+<br /> <br />
 
 <blockquote>
 <h4> WP Staging for WordPress Migration </h4>
@@ -268,5 +272,5 @@ After installation goto the settings page 'Staging' and do your adjustments ther
 
 == Upgrade Notice ==
 
-= 1.1.3 =
-1.1.3 <strong>Compatible up to WP 4.7.2</strong>
+= 1.1.6 =
+1.1.6 <strong>Please test our beta version 2.0.1 which has been improved tremendously: https://wp-staging.com/beta.php </strong>

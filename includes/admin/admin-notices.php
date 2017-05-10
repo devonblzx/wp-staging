@@ -29,6 +29,8 @@ function wpstg_admin_messages() {
         
         wpstg_start_poll();
         
+        wpstg_show_download();
+        
         if ( wpstg_is_admin_page() && !wp_is_writable( wpstg_get_upload_dir() ) ){
             echo '<div class="error">';
 			echo '<p><strong>WP Staging Folder Permission error: </strong>' . wpstg_get_upload_dir() . ' is not write and/or readable. <br> Check if the folder <strong>'.wpstg_get_upload_dir().'</strong> exists! File permissions should be chmod 755 or 777.</p>';
@@ -346,3 +348,51 @@ function wpstg_plugin_update_message( $args ) {
          echo json_encode(array("success")); exit;
  }
  add_action('wp_ajax_wpstg_hide_beta','wpstg_hide_beta_div');
+ 
+ 
+ /**
+  * Show download notice for beta version
+  */
+ function wpstg_show_download(){
+$notice = '<div class="wpstg_notice_download notice" style="box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);">
+    	<p>If you want to support development of <strong>WP STAGING</strong> please download our latest <strong>beta version 2.0.1</strong>: <a href="https://wp-staging.com/beta.php" target="_new">https://wp-staging.com/beta.php</a> <br>
+Version 2.0.1 is able to handle even the largest WordPress sites. Please send your feedback to <a href="mailto:support@wp-staging.com?subject=Beta Version Support&">support@wp-staging.com</a> or via contact form <a href="https://wp-staging.com/support/" target="_new">https://wp-staging.com/support/</a>.<br>Note: The beta version should not be used on production sites.
+      <p>
+        <ul>
+            <li><a href="javascript:void(0);" class="wpstg_hide_download" title="I understand" style="font-weight:bold;color:#00a0d2;">Do not show this again</a></li>
+        </ul>
+    </div>
+    <script>
+    jQuery( document ).ready(function( $ ) {
+        jQuery(\'.wpstg_hide_download\').click(function(){
+                 var data={\'action\':\'wpstg_hide_download\'}
+                jQuery.ajax({
+                    url: "'.admin_url( 'admin-ajax.php' ).'",
+                    type: "post",
+                    data: data,
+                    dataType: "json",
+                    async: !0,
+                    success: function(e) {
+                        if (e=="success") {
+                           jQuery(\'.wpstg_notice_download\').slideUp(\'fast\');
+                        }
+                    }
+                });
+        })
+    });
+    </script>
+    ';
+
+    if( get_option('wpstg_download') !== "no" && wpstg_is_admin_page() ){
+         echo $notice;   
+    }
+ }
+ 
+ /**
+  * Ajax Action for hiding beta download notice
+  */
+  function wpstg_hide_download(){
+         update_option('wpstg_download','no');
+         echo json_encode(array("success")); exit;
+ }
+ add_action('wp_ajax_wpstg_hide_download','wpstg_hide_download');
