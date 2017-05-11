@@ -30,5 +30,6 @@ if( isset( $wpstg_options['uninstall_on_delete'] ) ) {
     delete_option( 'wpstg_settings' );
     delete_option( 'wpstg_existing_clones' );
     delete_option( 'wpstg_start_poll' );
+    delete_option( 'wpstg_download' );
 }
 
