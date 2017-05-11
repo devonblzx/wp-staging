@@ -105,9 +105,9 @@ module.exports = function(grunt) {
                     archive: '<%= paths.basezip %>/<%= pkg.name %>.zip' //target
                 },
                 cwd: '<%= paths.basetrunk %>',
-                src: ['**/*']
+                src: ['**/*'],
                 //dest: '../../',
-                //expand: true
+                expand: true
             }
         }
 
